@@ -1,6 +1,7 @@
-let size = 9;
-let board = [size];
+const DEBUG = true;
+const size = 9;
 
+let board = [size];
 let boardWidth = 450;
 let offset = boardWidth / size;
 
@@ -15,34 +16,13 @@ function setup() {
   setupSolveButton();
 }
 
-function setupResetButton() {
-  resetButton = createButton('Reset');
-  resetButton.position(10, 470);
-  resetButton.mousePressed(setupGrid);
-
-  resetButton.style('border', 'none');
-  resetButton.style('padding', '6px 10px');
-  resetButton.style('border-radius', '6px');
-  resetButton.style('transition-duration', '0.4s');
-}
-
-function setupSolveButton() {
-  resetButton = createButton('Solve');
-  resetButton.position(70, 470);
-  resetButton.mousePressed(setupGrid);
-
-  resetButton.style('border', 'none');
-  resetButton.style('padding', '6px 10px');
-  resetButton.style('border-radius', '6px');
-  resetButton.style('transition-duration', '0.4s');
-}
-
 function setupGrid() {
   for (let i = 0; i < size; i++) {
-    board[i] = [size];
+    let row = [size];
     for (let j = 0; j < size; j++) {
-      board[i][j] = new Cell(i, j, 0);
+      row[j] = new Spot(i, j, 0);
     }
+    board[i] = row;
   }
 }
 
@@ -50,12 +30,11 @@ function draw() {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       board[i][j].show();
+      if (DEBUG) board[i][j].showIndexes();
     }
   }
   drawBoldLines();
 }
-
-
 
 function drawBoldLines() {
   push();
@@ -79,30 +58,26 @@ function mouseClicked() {
   return false;
 }
 
-class Cell{
-    x = -1;
-    y = -1;
-    val = 0;
+function setupResetButton() {
+  resetButton = createButton('Reset');
+  resetButton.position(10, 470);
+  resetButton.mousePressed(setupGrid);
 
-    constructor(x, y, val) {
-      this.x = x * offset;
-      this.y = y * offset;
-      this.val = val;
-    }
-
-    show() {
-//      noFill();
-      textSize(32);
-      square(this.x, this.y, offset);
-
-      textAlign(CENTER);
-      if (this.val !== 0) {
-        text(this.val, this.x + offset / 2, this.y + offset * 0.75);
-      }
-    }
-
-    clicked() {
-      if (this.val === 9) this.val = 0;
-      else this.val++;
-    }
+  resetButton.style('border', 'none');
+  resetButton.style('padding', '6px 10px');
+  resetButton.style('border-radius', '6px');
+  resetButton.style('transition-duration', '0.4s');
 }
+
+function setupSolveButton() {
+  resetButton = createButton('Solve');
+  resetButton.position(70, 470);
+  resetButton.mousePressed(solve);
+
+  resetButton.style('border', 'none');
+  resetButton.style('padding', '6px 10px');
+  resetButton.style('border-radius', '6px');
+  resetButton.style('transition-duration', '0.4s');
+}
+
+
