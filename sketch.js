@@ -1,4 +1,3 @@
-
 let size = 9;
 let board = [size];
 
@@ -27,20 +26,24 @@ function draw() {
       board[i][j].show();
     }
   }
+  drawBoldLines();
+}
+
+function drawBoldLines() {
+  push();
+  strokeWeight(2.5);
+  line(0, 3 * offset, boardWidth, 3 * offset);
+  line(0, 6 * offset, boardWidth, 6 * offset);
+  line(3 * offset, 0, 3 * offset, boardWidth);
+  line(6 * offset, 0, 6 * offset, boardWidth);
+  pop();
 }
 
 function mouseClicked() {
-  square(mouseX, mouseY, 5);
-
-  let mX = mouseX * offset;
-  let mY = mouseY * offset;
-
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
-      board[i][j].show();
-    }
-  }
-
+  let mX = floor(mouseX / offset);
+  let mY = floor(mouseY / offset);
+//  print('clicked at: ', mX, '-', mY, ' | ', mouseX, '-', mouseY);
+  board[mX][mY].clicked();
   // prevent default
   return false;
 }
@@ -57,11 +60,18 @@ class Cell{
     }
 
     show() {
-      noFill();
+//      noFill();
       textSize(32);
       square(this.x, this.y, offset);
-      fill(255);
+
       textAlign(CENTER);
-      text(this.val, this.x + offset / 2, this.y + offset * 0.75);
+      if (this.val !== 0) {
+        text(this.val, this.x + offset / 2, this.y + offset * 0.75);
+      }
+    }
+
+    clicked() {
+      if (this.val === 9) this.val = 0;
+      else this.val++;
     }
 }
