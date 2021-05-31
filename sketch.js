@@ -10,8 +10,8 @@ let solveButton;
 
 function setup() {
   createCanvas(boardWidth, boardWidth);
-  setupGrid();
 
+  setupGrid();
   setupResetButton();
   setupSolveButton();
 }
