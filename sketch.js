@@ -4,9 +4,37 @@ let board = [size];
 let boardWidth = 450;
 let offset = boardWidth / size;
 
+let resetButton;
+let solveButton;
+
 function setup() {
   createCanvas(boardWidth, boardWidth);
   setupGrid();
+
+  setupResetButton();
+  setupSolveButton();
+}
+
+function setupResetButton() {
+  resetButton = createButton('Reset');
+  resetButton.position(10, 470);
+  resetButton.mousePressed(setupGrid);
+
+  resetButton.style('border', 'none');
+  resetButton.style('padding', '6px 10px');
+  resetButton.style('border-radius', '6px');
+  resetButton.style('transition-duration', '0.4s');
+}
+
+function setupSolveButton() {
+  resetButton = createButton('Solve');
+  resetButton.position(70, 470);
+  resetButton.mousePressed(setupGrid);
+
+  resetButton.style('border', 'none');
+  resetButton.style('padding', '6px 10px');
+  resetButton.style('border-radius', '6px');
+  resetButton.style('transition-duration', '0.4s');
 }
 
 function setupGrid() {
@@ -27,6 +55,8 @@ function draw() {
   drawBoldLines();
 }
 
+
+
 function drawBoldLines() {
   push();
   strokeWeight(2.5);
@@ -38,10 +68,13 @@ function drawBoldLines() {
 }
 
 function mouseClicked() {
-  let mX = floor(mouseX / offset);
-  let mY = floor(mouseY / offset);
-//  print('clicked at: ', mX, '-', mY, ' | ', mouseX, '-', mouseY);
-  board[mX][mY].clicked();
+  // check if clicked in grid
+  if (mouseX < boardWidth && mouseY < boardWidth) {
+    let mX = floor(mouseX / offset);
+    let mY = floor(mouseY / offset);
+//    print('clicked at: ', mX, '-', mY, ' | ', mouseX, '-', mouseY);
+    board[mX][mY].clicked();
+  }
   // prevent default
   return false;
 }
