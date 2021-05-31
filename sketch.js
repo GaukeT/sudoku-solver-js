@@ -8,6 +8,8 @@ let offset = boardWidth / size;
 let resetButton;
 let solveButton;
 
+let options = [0,1,2,3,4,5,6,7,8,9];
+
 function setup() {
   createCanvas(boardWidth, boardWidth);
 
@@ -20,7 +22,8 @@ function setupGrid() {
   for (let i = 0; i < size; i++) {
     let row = [size];
     for (let j = 0; j < size; j++) {
-      row[j] = new Spot(i, j, 0);
+      row[j] = new Spot(j, i, 0);
+//      if (DEBUG) row[j] = new Spot(j, i, random(options));
     }
     board[i] = row;
   }
@@ -30,7 +33,9 @@ function draw() {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       board[i][j].show();
-      if (DEBUG) board[i][j].showIndexes();
+      if (DEBUG) {
+        board[i][j].showIndexes();
+      }
     }
   }
   drawBoldLines();
@@ -49,10 +54,10 @@ function drawBoldLines() {
 function mouseClicked() {
   // check if clicked in grid
   if (mouseX < boardWidth && mouseY < boardWidth) {
-    let mX = floor(mouseX / offset);
     let mY = floor(mouseY / offset);
+    let mX = floor(mouseX / offset);
 //    print('clicked at: ', mX, '-', mY, ' | ', mouseX, '-', mouseY);
-    board[mX][mY].clicked();
+    board[mY][mX].clicked();
   }
   // prevent default
   return false;
@@ -79,5 +84,3 @@ function setupSolveButton() {
   resetButton.style('border-radius', '6px');
   resetButton.style('transition-duration', '0.4s');
 }
-
-
