@@ -5,9 +5,7 @@ let boardWidth = 450;
 let offset = boardWidth / size;
 
 function setup() {
-
   createCanvas(boardWidth, boardWidth);
-
   setupGrid();
 }
 
