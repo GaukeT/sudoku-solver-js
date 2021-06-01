@@ -1,6 +1,5 @@
 let yCol = 0;
 let xCol = 0;
-let solvedState = false;
 
 async function solve() {
   for (let y = 0; y < 9; y++) {
@@ -11,7 +10,7 @@ async function solve() {
           if (possible(y, x, n))  {
             game.setVal(y, x, n);
             solve();
-            if (!solvedState) game.setVal(y, x, 0);
+            if (!game.isSolved()) game.setVal(y, x, 0);
           }
         }
         // if no options available you're on a dead end.
@@ -21,7 +20,6 @@ async function solve() {
   }
 
   // solved state
-  solvedState = game.isSolved();
   return;
 }
 
