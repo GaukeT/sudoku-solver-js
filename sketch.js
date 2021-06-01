@@ -26,7 +26,9 @@ function mouseClicked(e) {
     let mY = floor(mouseY / game.offset);
     let mX = floor(mouseX / game.offset);
 
-    game.clicked(mY, mX, !e.ctrlKey);
+    if (mY >= 0 && mX >= 0) {
+      game.clicked(mY, mX, !e.ctrlKey);
+    }
   }
   // prevent default
   return false;
