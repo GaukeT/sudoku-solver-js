@@ -59,6 +59,6 @@ function setupSolveButton() {
   styleButton(solveButton);
 }
 
-function solveSudoku() {
+async function solveSudoku() {
   solve();
 }
