@@ -47,10 +47,6 @@ class Game {
       pop();
     }
 
-    solve() {
-        print('solve');
-    }
-
     clicked(y, x, increment) {
         if (this.board[y][x]) {
             this.board[y][x].clicked(increment);

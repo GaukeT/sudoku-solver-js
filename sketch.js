@@ -49,7 +49,7 @@ function setupResetButton() {
 }
 
 function resetBoard() {
-    game.initBoard();
+  game.initBoard();
 }
 
 function setupSolveButton() {
@@ -60,5 +60,5 @@ function setupSolveButton() {
 }
 
 function solveSudoku() {
-    game.solve();
+  solve();
 }
