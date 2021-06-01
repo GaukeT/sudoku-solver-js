@@ -60,5 +60,9 @@ function setupSolveButton() {
 }
 
 async function solveSudoku() {
-  solve();
+  if (game.isValidBoard()) {
+    solve();
+  } else {
+    alert('Invalid input. Sudoku is not solvable!');
+  }
 }
