@@ -21,7 +21,7 @@ async function solve() {
   }
 
   // solved state
-  solvedState = true;
+  solvedState = game.isSolved();
   return;
 }
 

@@ -47,6 +47,15 @@ class Game {
       pop();
     }
 
+    isSolved() {
+        for (let y = 0; y < this.size; y++) {
+            for (let x = 0; x < this.size; x++) {
+                if (this.board[y][x].getVal() === 0) return false;
+            }
+        }
+        return true;
+    }
+
     clicked(y, x, increment) {
         if (this.board[y][x]) {
             this.board[y][x].clicked(increment);
