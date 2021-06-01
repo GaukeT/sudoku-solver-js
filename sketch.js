@@ -38,11 +38,7 @@ function setupResetButton() {
   resetButton = createButton('Reset');
   resetButton.position(10, 540);
   resetButton.mousePressed(resetBoard);
-
-  resetButton.style('border', 'none');
-  resetButton.style('padding', '6px 10px');
-  resetButton.style('border-radius', '6px');
-  resetButton.style('transition-duration', '0.4s');
+  resetButton.class('btn-design');
 }
 
 function resetBoard() {
@@ -50,14 +46,10 @@ function resetBoard() {
 }
 
 function setupSolveButton() {
-  resetButton = createButton('Solve');
-  resetButton.position(80, 540);
-  resetButton.mousePressed(solveSudoku);
-
-  resetButton.style('border', 'none');
-  resetButton.style('padding', '6px 10px');
-  resetButton.style('border-radius', '6px');
-  resetButton.style('transition-duration', '0.4s');
+  solveButton = createButton('Solve');
+  solveButton.position(80, 540);
+  solveButton.mousePressed(solveSudoku);
+  solveButton.class('btn-design');
 }
 
 function solveSudoku() {
