@@ -5,6 +5,7 @@ class Spot {
     offset;
     isChanged = false;
     isPossible = true;
+    manuallySet = false;
 
     indexY = -1;
     indexX = -1;
@@ -35,8 +36,10 @@ class Spot {
 
         if(!this.isPossible) {
           fill(250,0,0);
+        } else if (this.manuallySet){
+          fill(0);
         } else {
-          fill(50);
+          fill(150);
         }
 
         text(this.val, this.x + this.offset * 0.5, this.y + this.offset * 0.75);
@@ -60,7 +63,9 @@ class Spot {
         if (this.val === 0) this.val = 9;
         else this.val--;
       }
+
       this.isChanged = true;
+      this.manuallySet = this.val !== 0;
     }
 
     getVal() {
