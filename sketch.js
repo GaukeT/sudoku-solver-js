@@ -34,11 +34,18 @@ function mouseClicked(e) {
   return false;
 }
 
+function styleButton(button) {
+  button.style('border', 'none');
+  button.style('padding', '6px 10px');
+  button.style('border-radius', '6px');
+  button.style('transition-duration', '0.4s');
+}
+
 function setupResetButton() {
   resetButton = createButton('Reset');
   resetButton.position(10, 540);
   resetButton.mousePressed(resetBoard);
-  resetButton.class('btn-design');
+  styleButton(resetButton);
 }
 
 function resetBoard() {
@@ -49,7 +56,7 @@ function setupSolveButton() {
   solveButton = createButton('Solve');
   solveButton.position(80, 540);
   solveButton.mousePressed(solveSudoku);
-  solveButton.class('btn-design');
+  styleButton(solveButton);
 }
 
 function solveSudoku() {

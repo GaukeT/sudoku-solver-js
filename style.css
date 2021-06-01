@@ -10,10 +10,3 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   margin-inline-start: 20px
 }
-
-.btn-design {
-  border, none
-  padding, 6px 10px
-  border-radius, 6px
-  transition-duration, 0.4s
-}
