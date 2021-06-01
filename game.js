@@ -52,4 +52,12 @@ class Game {
             this.board[y][x].clicked(increment);
         }
     }
+
+    getVal(y, x) {
+        return this.board[y][x].getVal();
+    }
+
+    setVal(y, x, newVal) {
+        return this.board[y][x].setVal(newVal);
+    }
 }

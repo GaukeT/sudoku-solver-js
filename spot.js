@@ -62,4 +62,16 @@ class Spot {
       }
       this.isChanged = true;
     }
+
+    getVal() {
+        return this.val;
+    }
+
+    setVal(newVal) {
+        // TODO: validation newVal between 0 and 9;
+        if (this.val !== newVal) {
+            this.isChanged = true;
+            this.val = newVal;
+        }
+    }
 }
