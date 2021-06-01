@@ -1,63 +1,32 @@
-const DEBUG = true;
-const size = 9;
-
-let board = [size];
-let boardWidth = 450;
-let offset = boardWidth / size;
+const DEBUG = false;
 
 let resetButton;
 let solveButton;
 
-let options = [0,1,2,3,4,5,6,7,8,9];
+let boardWidth = 450;
+let game;
 
 function setup() {
-  createCanvas(boardWidth, boardWidth);
+  var cnv = createCanvas(boardWidth, boardWidth);
+  cnv.parent('cnv-div');
 
-  setupGrid();
   setupResetButton();
   setupSolveButton();
-}
 
-function setupGrid() {
-  for (let i = 0; i < size; i++) {
-    let row = [size];
-    for (let j = 0; j < size; j++) {
-      row[j] = new Spot(j, i, 0);
-//      if (DEBUG) row[j] = new Spot(j, i, random(options));
-    }
-    board[i] = row;
-  }
+  game = new Game(boardWidth);
 }
 
 function draw() {
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
-      board[i][j].show();
-      if (DEBUG) {
-        board[i][j].showIndexes();
-      }
-    }
-  }
-  drawBoldLines();
+  game.draw();
 }
 
-function drawBoldLines() {
-  push();
-  strokeWeight(2.5);
-  line(0, 3 * offset, boardWidth, 3 * offset);
-  line(0, 6 * offset, boardWidth, 6 * offset);
-  line(3 * offset, 0, 3 * offset, boardWidth);
-  line(6 * offset, 0, 6 * offset, boardWidth);
-  pop();
-}
-
-function mouseClicked() {
+function mouseClicked(e) {
   // check if clicked in grid
-  if (mouseX < boardWidth && mouseY < boardWidth) {
-    let mY = floor(mouseY / offset);
-    let mX = floor(mouseX / offset);
-//    print('clicked at: ', mX, '-', mY, ' | ', mouseX, '-', mouseY);
-    board[mY][mX].clicked();
+  if (game && mouseX < boardWidth && mouseY < boardWidth) {
+    let mY = floor(mouseY / game.offset);
+    let mX = floor(mouseX / game.offset);
+
+    game.clicked(mY, mX, !e.ctrlKey);
   }
   // prevent default
   return false;
@@ -65,8 +34,8 @@ function mouseClicked() {
 
 function setupResetButton() {
   resetButton = createButton('Reset');
-  resetButton.position(10, 470);
-  resetButton.mousePressed(setupGrid);
+  resetButton.position(10, 540);
+  resetButton.mousePressed(resetBoard);
 
   resetButton.style('border', 'none');
   resetButton.style('padding', '6px 10px');
@@ -74,13 +43,21 @@ function setupResetButton() {
   resetButton.style('transition-duration', '0.4s');
 }
 
+function resetBoard() {
+    game.initBoard();
+}
+
 function setupSolveButton() {
   resetButton = createButton('Solve');
-  resetButton.position(70, 470);
-  resetButton.mousePressed(solve);
+  resetButton.position(80, 540);
+  resetButton.mousePressed(solveSudoku);
 
   resetButton.style('border', 'none');
   resetButton.style('padding', '6px 10px');
   resetButton.style('border-radius', '6px');
   resetButton.style('transition-duration', '0.4s');
+}
+
+function solveSudoku() {
+    game.solve();
 }
