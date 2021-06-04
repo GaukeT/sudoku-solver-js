@@ -1,4 +1,5 @@
 class Game {
+    initLoaded = false;
     size = 9;
     board;
     width;
@@ -14,12 +15,35 @@ class Game {
     }
 
     initBoard() {
+        let nonManually = 0;
+        for (let y = 0; y < this.size; y++) {
+            for (let x = 0; x < this.size; x++) {
+                // undefined board
+                if (!this.board[y][x]) {
+                    nonManually++;
+                    break;
+                // initially loaded board
+                } else if (this.board[y][x].getVal() !== 0) {
+                    if (!this.board[y][x].manuallySet) {
+                        nonManually++;
+                        break;
+                    }
+                }
+             }
+             if (nonManually !== 0) break;
+        }
+        let removeMan = (nonManually === 0);
+
         // board[y-axis][x-axis]
         for (let y = 0; y < this.size; y++) {
             let row = [this.size];
             for (let x = 0; x < this.size; x++) {
-                row[x] = new Spot(y, x, 0, this.offset);
-                // if (DEBUG) row[x] = new Spot(y, x, random(options));
+                if (!this.board[y] || !this.board[y][x]
+                      || removeMan || !this.board[y][x].manuallySet) {
+                    row[x] = new Spot(y, x, 0, this.offset);
+                } else {
+                    row[x] = this.board[y][x];
+                }
              }
             this.board[y] = row;
         }
