@@ -43,7 +43,7 @@ function styleButton(button) {
 
 function setupResetButton() {
   resetButton = createButton('Reset');
-  resetButton.position(10, 540);
+  resetButton.position(10, 550);
   resetButton.mousePressed(resetBoard);
   styleButton(resetButton);
 }
@@ -54,7 +54,7 @@ function resetBoard() {
 
 function setupSolveButton() {
   solveButton = createButton('Solve');
-  solveButton.position(80, 540);
+  solveButton.position(80, 550);
   solveButton.mousePressed(solveSudoku);
   styleButton(solveButton);
 }

@@ -8,5 +8,33 @@ canvas {
 
 h1 {
   font-family: Arial, Helvetica, sans-serif;
-  margin-inline-start: 20px
+  margin-inline-start: 20px;
+  display: inline-block;
 }
+
+.header {
+  display: inline-block;
+}
+
+.header i {
+  position: relative;
+  display: inline-block;
+}
+
+.header i .tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.header i:hover .tooltip {
+    visibility:visible;
+}
+
