@@ -43,6 +43,8 @@ class Spot {
         }
 
         text(this.val, this.x + this.offset * 0.5, this.y + this.offset * 0.75);
+      } else if (this.isChanged) {
+        this.isPossible = true;
       }
 
       this.isChanged = false;
